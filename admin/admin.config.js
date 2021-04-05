@@ -28,6 +28,36 @@ module.exports = {
       ],
     });
 
+    config.module.rules.push({
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: require.resolve("babel-loader"),
+        options: {
+          cacheDirectory: true,
+          presets: [
+            require.resolve("@babel/preset-env"),
+            require.resolve("@babel/preset-react"),
+          ],
+          plugins: [
+            require.resolve("@babel/plugin-proposal-class-properties"),
+            require.resolve("@babel/plugin-syntax-dynamic-import"),
+            require.resolve("@babel/plugin-transform-modules-commonjs"),
+            require.resolve("@babel/plugin-proposal-async-generator-functions"),
+            [
+              require.resolve("@babel/plugin-transform-runtime"),
+              {
+                helpers: true,
+                regenerator: true,
+              },
+            ],
+          ],
+        },
+      },
+    });
+
+    console.log(config.module.rules);
+
     return config;
   },
 };
