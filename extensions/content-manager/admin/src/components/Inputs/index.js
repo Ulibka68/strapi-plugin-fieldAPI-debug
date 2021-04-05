@@ -1,22 +1,16 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { memo, useMemo } from "react";
 import PropTypes from "prop-types";
 import { get, omit, take } from "lodash";
 import isEqual from "react-fast-compare";
 import { useIntl } from "react-intl";
 import { Inputs as InputsIndex } from "@buffetjs/custom";
-
 import { NotAllowedInput, useStrapi } from "strapi-helper-plugin";
-// import { useContentTypeLayout } from "../../hooks";
-import { useContentTypeLayout } from "strapi-plugin-content-manager/admin/src/hooks";
-// import { getFieldName } from "../../utils";
-import { getFieldName } from "strapi-plugin-content-manager/admin/src/utils";
-// import InputJSONWithErrors from "../InputJSONWithErrors";
-import InputJSONWithErrors from "strapi-plugin-content-manager/admin/src/components/InputJSONWithErrors";
-// import SelectWrapper from "../SelectWrapper";
-import SelectWrapper from "strapi-plugin-content-manager/admin/src/components/SelectWrapper";
-import WysiwygWithErrors from "strapi-plugin-content-manager/admin/src/components/WysiwygWithErrors";
-import InputUID from "strapi-plugin-content-manager/admin/src/components/InputUID";
+import { useContentTypeLayout } from "../../hooks";
+import { getFieldName } from "../../utils";
+import InputJSONWithErrors from "../InputJSONWithErrors";
+import SelectWrapper from "../SelectWrapper";
+import WysiwygWithErrors from "../WysiwygWithErrors";
+import InputUID from "../InputUID";
 import {
   connect,
   generateOptions,
@@ -24,8 +18,7 @@ import {
   getStep,
   select,
   VALIDATIONS_TO_OMIT,
-} from "strapi-plugin-content-manager/admin/src/components/Inputs/utils";
-// } from "./utils";
+} from "./utils";
 
 function Inputs({
   allowedFields,
@@ -42,6 +35,7 @@ function Inputs({
   fieldSchema,
   metadatas,
 }) {
+  console.log("----------- INPUTS ----------------");
   const {
     strapi: { fieldApi },
   } = useStrapi();
@@ -108,8 +102,7 @@ function Inputs({
     if (type === "media" && !value) {
       return [];
     }
-
-    console.log("inputValue : ", value);
+    console.log("value : ", value);
     return value;
   }, [type, value]);
 
@@ -191,6 +184,7 @@ function Inputs({
   );
 
   const otherFields = useMemo(() => {
+    console.log("otherFields");
     return fieldApi.getFields();
   }, [fieldApi]);
 
@@ -220,6 +214,7 @@ function Inputs({
     );
   }
 
+  console.log("InputsIndex keys, value : ", keys, value);
   return (
     <InputsIndex
       {...metadatas}

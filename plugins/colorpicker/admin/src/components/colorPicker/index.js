@@ -37,7 +37,8 @@ const ColorPicker = (props) => {
   const { value, onChange } = props;
   const [showPicker, setShowPicker] = useState(false);
   const [color, setColor] = useState(value || "#FFFFFF");
-
+  console.log("ColorPicker-------- value : ", value);
+  console.log("ColorPicker-------- color : ", color);
   /**
    * Makes the color value available to the document for database update
    * @param {string} colorValue - in hex format
@@ -50,20 +51,23 @@ const ColorPicker = (props) => {
    * Assign a default color value if the document doesn't have one yet
    */
   useEffect(() => {
-    console.log("ColorPicker-------- value : ", props.value);
+    // console.log("ColorPicker-------- value : ", props.value);
 
     if (!value) {
       updateColorValue(color);
+    } else {
+      setColor(value);
     }
-  }, []);
+    // updateColorValue(value || color);
+  }, [value]);
 
   /**
    * Handle color change from the the color picker
    * @param {string} color - in hex format
    */
-  const handleChangeComplete = (colorp) => {
-    setColor(colorp.hex);
-    updateColorValue(colorp.hex);
+  const handleChangeComplete = (color) => {
+    setColor(color.hex);
+    updateColorValue(color.hex);
   };
 
   return (

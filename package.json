@@ -12,7 +12,8 @@
     "strapi": "strapi",
     "lint:fix": "eslint --fix .",
     "clean": "rimraf ./**/node_modules",
-    "clean-build": "rimraf ./build ./.cache"
+    "clean-build": "rimraf ./build ./.cache",
+    "copy": "copyfiles -f ./node_modules/strapi-plugin-content-manager/admin/src/components/Inputs/index.js ./extensions/content-manager/admin/src/components/Inputs"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.0",
